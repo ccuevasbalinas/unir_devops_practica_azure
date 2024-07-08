@@ -6,13 +6,13 @@ variable "location" {
 
 variable "resource_group_name" {
   type        = string
-  default     = "ResourceGroupUNIR"
+  default     = "ccbcp2arg"
   description = "Name of the resource group"
 }
 
 variable "container_registry_name" {
   type        = string
-  default     = "ContainerRegistryUNIR"
+  default     = "ccbcp2acr"
   description = "Name of the Azure Container Registry"
 }
 
