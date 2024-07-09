@@ -40,6 +40,12 @@ variable "subnet_name" {
   description = "Name of the Subnet"
 }
 
+variable "public_ip_name" {
+  type        = string
+  default     = "ccbcp2apip"
+  description = "Name of the Public IP"
+}
+
 variable "network_interface_name" {
   type        = string
   default     = "ccbcp2ani"
