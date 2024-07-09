@@ -45,3 +45,9 @@ variable "network_interface_name" {
   default     = "ccbcp2ani"
   description = "Name of the Network Interface"
 }
+
+variable "network_security_group_name" {
+  type        = string
+  default     = "ccbcp2ansg"
+  description = "Name of the Network Security Group"
+}

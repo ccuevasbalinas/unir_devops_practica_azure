@@ -40,3 +40,14 @@ resource "azurerm_network_interface" "ani" {
     private_ip_address_allocation = "Dynamic"
   }
 }
+
+resource "azurerm_network_security_group" "ansg" {
+  name                = var.network_security_group_name
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+resource "azurerm_network_interface_security_group_association" "anisga" {
+  network_interface_id      = azurerm_network_interface.ani.id
+  network_security_group_id = azurerm_network_security_group.ansg.id
+}
