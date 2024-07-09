@@ -25,5 +25,17 @@ variable "sku" {
 variable "availability_set_name" {
   type        = string
   default     = "ccbcp2aas"
-  description = "Name of availability set"
+  description = "Name of Availability Set"
+}
+
+variable "virtual_network_name" {
+  type        = string
+  default     = "ccbcp2avn"
+  description = "Name of the Virtual Network"
+}
+
+variable "subnet_name" {
+  type        = string
+  default     = "ccbcp2asub"
+  description = "Name of the Subnet"
 }
