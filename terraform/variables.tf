@@ -39,3 +39,9 @@ variable "subnet_name" {
   default     = "ccbcp2asub"
   description = "Name of the Subnet"
 }
+
+variable "network_interface_name" {
+  type        = string
+  default     = "ccbcp2ani"
+  description = "Name of the Network Interface"
+}

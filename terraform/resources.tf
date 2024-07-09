@@ -6,7 +6,7 @@ resource "azurerm_resource_group" "rg" {
 resource "azurerm_container_registry" "acr" {
   name                = var.container_registry_name
   resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
+  location            = var.location
   sku                 = var.sku
 }
 
@@ -28,4 +28,15 @@ resource "azurerm_subnet" "asub" {
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.avn.name
   address_prefixes     = ["10.0.1.0/24"]
+}
+
+resource "azurerm_network_interface" "ani" {
+  name                = var.network_interface_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.asub.id
+    private_ip_address_allocation = "Dynamic"
+  }
 }
