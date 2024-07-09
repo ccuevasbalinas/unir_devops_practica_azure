@@ -21,3 +21,9 @@ variable "sku" {
   default     = "Basic"
   description = "SKU"
 }
+
+variable "availability_set_name" {
+  type        = string
+  default     = "ccbcp2aas"
+  description = "Name of availability set"
+}
