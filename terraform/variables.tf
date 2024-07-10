@@ -57,3 +57,10 @@ variable "network_security_group_name" {
   default     = "ccbcp2ansg"
   description = "Name of the Network Security Group"
 }
+
+variable "load_balancer_name" {
+  type        = string
+  default     = "ccbcp2alb"
+  description = "Name of the Load Balancer"
+}
+
