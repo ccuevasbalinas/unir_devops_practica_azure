@@ -64,3 +64,8 @@ variable "load_balancer_name" {
   description = "Name of the Load Balancer"
 }
 
+variable "storage_account_name" {
+  type        = string
+  default     = "ccbcp2asa"
+  description = "Name of the Storage account"
+}
