@@ -8,6 +8,7 @@ resource "azurerm_container_registry" "acr" {
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   sku                 = var.sku
+  admin_enabled       = true
 }
 
 resource "azurerm_availability_set" "aas" {
@@ -32,8 +33,8 @@ resource "azurerm_subnet" "asub" {
 
 resource "azurerm_public_ip" "apip" {
   name                = var.public_ip_name
-  location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
   allocation_method   = "Dynamic"
   sku                 = var.sku
 }
@@ -53,8 +54,8 @@ resource "azurerm_network_interface" "ani" {
 
 resource "azurerm_network_security_group" "ansg" {
   name                = var.network_security_group_name
-  location            = var.location
   resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
   security_rule {
     name                       = "ccbcp2ansgsr"
     priority                   = 1001
@@ -72,3 +73,10 @@ resource "azurerm_network_interface_security_group_association" "anisga" {
   network_interface_id      = azurerm_network_interface.ani.id
   network_security_group_id = azurerm_network_security_group.ansg.id
 }
+
+resource "azurerm_lb" "alb" {
+  name                = var.load_balancer_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.location
+}
+
