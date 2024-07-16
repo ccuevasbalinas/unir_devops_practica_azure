@@ -69,3 +69,21 @@ variable "storage_account_name" {
   default     = "ccbcp2asa"
   description = "Name of the Storage account"
 }
+
+variable "virtual_machine_name" {
+  type        = string
+  default     = "ccbcp2avm"
+  description = "Name of the Virtual Machine"
+}
+
+variable "virtual_machine_size" {
+  type        = string
+  default     = "Standard_DS1_v2"
+  description = "Size of the Virtual Machine: 3.5GB, 1 CPU"
+}
+
+variable "kubernetes_cluster_name" {
+  type        = string
+  default     = "ccbcp2aks"
+  description = "Name of the Kubernetes cluster"
+}

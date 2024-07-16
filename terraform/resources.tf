@@ -88,3 +88,57 @@ resource "azurerm_storage_account" "asa" {
   account_replication_type = "LRS"
 }
 
+resource "azurerm_linux_virtual_machine" "avm" {
+  name                  = var.virtual_machine_name
+  resource_group_name   = azurerm_resource_group.rg.name
+  location              = azurerm_resource_group.rg.location
+  size                  = var.virtual_machine_size
+  availability_set_id   = azurerm_availability_set.aas.id
+  network_interface_ids = [azurerm_network_interface.ani.id]
+  admin_username        = "adminuser"
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("~/.ssh/id_rsa.pub")
+  }
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "minimal-22_04-lts-gen2" //"22_04-lts-gen2"
+    version   = "latest"
+  }
+  boot_diagnostics {
+    storage_account_uri = azurerm_storage_account.asa.primary_blob_endpoint
+  }
+}
+
+/*
+resource "azurerm_kubernetes_cluster" "aks" {
+  name                = var.kubernetes_cluster_name
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  kubernetes_version  = "1.25.5"
+  dns_prefix          = var.kubernetes_cluster_name
+
+  default_node_pool {
+    name                = var.kubernetes_cluster_name
+    node_count          = 1
+    vm_size             = "Standard_DS2_v2"
+    type                = "VirtualMachineScaleSets"
+    enable_auto_scaling = false
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  network_profile {
+    load_balancer_sku = "basic"
+    network_plugin    = "kubenet"
+  }
+  tags = var.tag_resources
+}
+*/
