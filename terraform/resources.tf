@@ -3,6 +3,7 @@ resource "azurerm_resource_group" "rg" {
   location = var.location
 }
 
+
 resource "azurerm_container_registry" "acr" {
   name                = var.container_registry_name
   resource_group_name = azurerm_resource_group.rg.name
@@ -107,7 +108,7 @@ resource "azurerm_linux_virtual_machine" "avm" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
-    sku       = "minimal-22_04-lts-gen2" //"22_04-lts-gen2"
+    sku       = "22_04-lts-gen2"
     version   = "latest"
   }
   boot_diagnostics {
@@ -115,20 +116,16 @@ resource "azurerm_linux_virtual_machine" "avm" {
   }
 }
 
-/*
 resource "azurerm_kubernetes_cluster" "aks" {
   name                = var.kubernetes_cluster_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
-  kubernetes_version  = "1.25.5"
   dns_prefix          = var.kubernetes_cluster_name
 
   default_node_pool {
-    name                = var.kubernetes_cluster_name
-    node_count          = 1
-    vm_size             = "Standard_DS2_v2"
-    type                = "VirtualMachineScaleSets"
-    enable_auto_scaling = false
+    name       = var.kubernetes_cluster_name
+    node_count = 1
+    vm_size    = "Standard_D2_v2"
   }
 
   identity {
@@ -139,6 +136,4 @@ resource "azurerm_kubernetes_cluster" "aks" {
     load_balancer_sku = "basic"
     network_plugin    = "kubenet"
   }
-  tags = var.tag_resources
 }
-*/
