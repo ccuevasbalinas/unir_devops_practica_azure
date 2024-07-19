@@ -1,0 +1,17 @@
+- name: 'Despliegue de aplicación en AKS'
+  hosts: # To define
+  tasks:
+    - name: 'Definir los objectos deployment y servicios'
+      template:
+        src: # To define
+        dest: # To define 
+
+    - name: 'Crear el namespace de trabajo'
+      kubernetes.core.k8s:
+        kind: # To define
+        name: # To define
+
+    - name: 'Crear Deployments y servicios de la aplicación'
+      kubernetes.core.k8s:
+        state: # To define
+        template: # To define

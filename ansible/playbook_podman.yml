@@ -1,0 +1,23 @@
+- name: 'Despliegue de aplicación Podman'
+  hosts: # To define
+  tasks:
+  - name: Login to a container registry using podman
+    containers.podman.podman_login:
+      username: ccbcp2acr
+      password: # To define
+      registry: ccbcp2acr.azurecr.io
+
+  - name: Buidl and Pull image using podman (Basic OCI image)
+    containers.podman.podman_image:
+      name: nginx
+      push: true
+      username: # To define
+      password: # To define
+      push_args:
+        dest: # To define 
+
+  - name: Run container
+    containers.podman.podman_container:
+      name: # To define
+      image: # To define
+      state: started
